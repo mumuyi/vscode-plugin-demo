@@ -1,0 +1,221 @@
+{
+    "name": "vscode-plugin-demo",
+    "displayName": "vscode-plugin-demo",
+    "description": "VSCode插件demo",
+    "keywords": [
+        "vscode",
+        "plugin",
+        "demo"
+    ],
+    "version": "1.0.3",
+    "publisher": "sxei",
+    "engines": {
+        "vscode": "^1.27.0"
+    },
+    "categories": [
+        "Other"
+    ],
+    "icon": "images/icon.png",
+    "activationEvents": [
+        "*"
+    ],
+    "main": "./src/extension",
+    "contributes": {
+        "configuration": {
+            "type": "object",
+            "title": "Code Recommendation",
+            "properties": {
+                "vscodePluginDemo.yourName": {
+                    "type": "string",
+                    "default": "guest",
+                    "description": "User ID"
+                },
+                "vscodePluginDemo.groupName": {
+                    "type": "string",
+                    "default": "guest",
+                    "description": "Group ID"
+                },
+                "vscodePluginDemo.showTip": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "Start Reconmmendation"
+                }
+            }
+        },
+        "commands": [
+            {
+                "command": "extension.sayHello",
+                "title": "Input your query"
+            },
+            {
+                "command": "extension.demo.getCurrentFilePath",
+                "title": "获取当前文件(夹)路径"
+            },
+            {
+                "command": "extension.demo.testMenuShow",
+                "title": "这个菜单仅在JS文件中出现",
+                "icon": {
+                    "light": "./images/tool-light.svg",
+                    "dark": "./images/tool-light.svg"
+                }
+            },
+            {
+                "command": "extension.cswebview",
+                "title": "code snippets recommendation"
+            },
+            {
+                "command": "extension.apiwebview",
+                "title": "APIs recommendation"
+            },
+            {
+                "command": "extension.demo.showWelcome",
+                "title": "显示自定义欢迎页"
+            }
+        ],
+        "keybindings": [
+            {
+                "command": "extension.sayHello",
+                "key": "ctrl+f10",
+                "mac": "cmd+f10",
+                "when": "editorTextFocus"
+            },
+            {
+                "command": "extension.cswebview",
+                "key": "ctrl+f9",
+                "mac": "cmd+f9",
+                "when": "editorTextFocus"
+            },
+            {
+                "command": "extension.apiwebview",
+                "key": "ctrl+f10",
+                "mac": "cmd+f10",
+                "when": "editorTextFocus"
+            }
+        ],
+        "menus": {
+            "editor/context": [
+                {
+                    "when": "editorFocus",
+                    "command": "extension.sayHello",
+                    "group": "navigation@6"
+                },
+                {
+                    "when": "editorFocus",
+                    "command": "extension.demo.getCurrentFilePath",
+                    "group": "navigation@5"
+                },
+                {
+                    "when": "editorFocus && resourceLangId == javascript",
+                    "command": "extension.demo.testMenuShow",
+                    "group": "z_commands"
+                },
+                {
+                    "command": "extension.cswebview",
+                    "group": "navigation"
+                },
+                {
+                    "command": "extension.apiwebview",
+                    "group": "navigation"
+                }
+            ],
+            "editor/title": [
+                {
+                    "when": "editorFocus && resourceLangId == javascript",
+                    "command": "extension.demo.testMenuShow",
+                    "group": "navigation"
+                }
+            ],
+            "editor/title/context": [
+                {
+                    "when": "resourceLangId == javascript",
+                    "command": "extension.demo.testMenuShow",
+                    "group": "navigation"
+                }
+            ],
+            "explorer/context": [
+                {
+                    "command": "extension.demo.getCurrentFilePath",
+                    "group": "navigation"
+                },
+                {
+                    "command": "extension.cswebview",
+                    "group": "navigation"
+                },
+                {
+                    "command": "extension.apiwebview",
+                    "group": "navigation"
+                }
+            ]
+        },
+        "snippets": [
+            {
+                "language": "javascript",
+                "path": "./snippets/javascript.json"
+            },
+            {
+                "language": "html",
+                "path": "./snippets/html.json"
+            }
+        ],
+        "viewsContainers": {
+            "activitybar": [
+                {
+                    "id": "beautifulGirl",
+                    "title": "label",
+                    "icon": "images/tool-light.svg"
+                }
+            ]
+        },
+        "views": {
+            "beautifulGirl": [
+                {
+                    "id": "beautifulGirl1",
+                    "name": "label 1"
+                },
+                {
+                    "id": "beautifulGirl2",
+                    "name": "label 2"
+                },
+                {
+                    "id": "beautifulGirl3",
+                    "name": "label 3"
+                }
+            ]
+        },
+        "iconThemes": [
+            {
+                "id": "testIconTheme",
+                "label": "测试图标主题",
+                "path": "./theme/icon-theme.json"
+            }
+        ]
+    },
+    "scripts": {
+        "postinstall": "node ./node_modules/vscode/bin/install",
+        "test": "node ./node_modules/vscode/bin/test"
+    },
+    "devDependencies": {
+        "@types/mocha": "^2.2.42",
+        "@types/node": "^7.0.43",
+        "eslint": "^4.11.0",
+        "nodejs-websocket": "^1.7.2",
+        "typescript": "^2.6.1",
+        "vscode": "^1.1.26",
+        "websocket-client": "^1.0.0",
+        "websocket": "1.0.28"
+    },
+    "license": "SEE LICENSE IN LICENSE.txt",
+    "bugs": {
+        "url": "https://github.com/mumuyi/vscode-plugin-demo/issues"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/mumuyi/vscode-plugin-demo.git"
+    },
+    "homepage": "https://github.com/mumuyi/vscode-plugin-demo.git/README.md",
+    "dependencies": {
+        "nodejs-websocket": "^1.7.2",
+        "websocket": "^1.0.28",
+        "ws": "^6.2.1"
+    }
+}

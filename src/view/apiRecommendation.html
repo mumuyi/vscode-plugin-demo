@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+  <style type="text/css">
+    body,html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      color: #fff;
+    }
+    .left {
+      float: left;
+      width: 10%;
+      height: 100%;
+      background-color: #81C7D4;
+    }
+    .center {
+      float: left;
+      width: 45%;
+      height: 100%;
+      background-color: #2EA9DF;
+    }
+    .right {
+      float: right;
+      width: 45%;
+      height: 100%;
+      background-color: #7DB9DE;
+      text-align: center;
+      align-content: center;
+      align-items: center;
+    }
+    .divTitle{
+        text-decoration-color: #000;
+        font-size: 20px;
+        text-align: center;
+        width: 100%;
+        height: 10%;
+    }
+    .toolButton{
+
+        width: 90%;
+        height: 40px;
+        
+        text-decoration:none;
+        background:#2f435e;
+        color:#f2f2f2;
+
+        font-size:14px;
+        font-weight:bold;
+        border-radius:3px;
+        
+        -webkit-transition:all linear 0.30s;
+        -moz-transition:all linear 0.30s;
+        transition:all linear 0.30s;
+
+        margin-top: 20px;
+    }
+    .csdiv{
+        width: 100%;
+        height: 90%;
+        text-align: center;
+        align-content: center;
+        align-items: center;
+    }
+    .cstable{
+        width: 99%;
+        height: 100%;
+        text-align: center;
+        align-self: center;
+    }
+    .cscell{
+        width: 100%;
+        height: 33%;
+        border: 1px solid white;
+    }
+    .sourcediv{
+        width: 100%;
+        height: 89%;
+        text-align: center;
+        align-content: center;
+        align-items: center;
+        border: 1px solid white;
+    }
+  </style>
+</head>
+<body>
+  <div class="left">
+    <div class="divTitle"> Tool Window</div>
+    <div id="toolWindowContent", text-align="center">
+        <button class="toolButton">Page Up</button>
+        <button class="toolButton">Page Down</button>
+        <button class="toolButton">Add Query</button>
+        <button class="toolButton">......</button>
+    </div>
+  </div>    
+  <div class="center">
+    <div class="divTitle"> Source Code</div>
+    <div id="apiSequence" class="sourcediv">API Sequences</div>
+  </div>
+  <div class="right">
+    <div class="divTitle"> Recommendation Codes</div>
+    <div id="sourceCodeContent" class="sourcediv">Source Code/Examples</div>
+  </div>
+</body>
+</html>

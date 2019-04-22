@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="../../lib/right.css" type="text/css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="../../lib/right click menu/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="../../lib/iview.css">
+    <link rel="stylesheet" href="pagecss.css" >
+    <script src="../../lib/right click menu/js/jquery.min.js" type="text/javascript"></script>
+    <script src="../../lib/right click menu/js/mouseRight.min.js" type="text/javascript" charset="utf-8"></script>
+    <script type="text/javascript" src="../../lib/right.js"> </script>
+    <script type="text/javascript" src="../../lib/vue.min.js"></script>
+    <script type="text/javascript" src="../../lib/iview.min.js"></script>
+    <script type="text/javascript" src="csrecommendation1.js"></script>
+</head>
+<body>
+    <div id="main">
+      <div id="menu0"  >
+        <Button-group vertical size="large">
+          <i-button style="height: 2cm"  type="info" long="true"  id="btnPrev" value="上一页" >
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-jiantoushang"></use>
+            </svg>
+          </i-button>
+          <i-button style="height: 2cm"  type="info" long="true" id="btnNext" value="下一页" >
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-jiantouxia"></use>
+            </svg>
+          </i-button>
+          <i-button style="height: 2cm"  type="info" long="true"  onclick="searchcontainer()">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-sousuo"></use>
+            </svg>
+          </i-button>
+        </Button-group>
+      </div>
+
+        <div class="container" style="display:none" id="searchcontainer">
+          <form action="" class="parent"  >
+              <input type="text" id="value">
+              <input type="button" value="搜索" onclick="search()">
+          </form>
+        </div>
+
+        <ul  style="height:100%">
+                <li class="block" id="cs1">代码区域1</li>
+                <li class="block" id="cs2" onclick="callVscode()">代码区域2</li>
+                <li class="block" id="cs3" onclick="testaaaaa('saddddddddddd','dassssssssssssssssssss')">代码区域3</li>
+                <li class="block" id="cs4">代码区域4</li>
+                <li class="block" id="cs5">代码区域5</li>
+                <li class="block" id="cs6">代码区域6</li>
+                <li class="block" id="cs7">代码区域7</li>
+                <li class="block" id="cs8">代码区域8</li>
+                <li class="block" id="cs9">代码区域9</li>
+                <li class="block" id="cs10">代码区域10</li>
+                <li class="block" id="cs11">代码区域11</li>
+                <li class="block" id="cs12">代码区域12</li>
+                <li class="block">代码区域13</li>
+                <li class="block">代码区域14</li>
+                <li class="block">代码区域15</li>
+                <li class="block">代码区域16</li>
+                <li class="block">代码区域17</li>
+                <li class="block">代码区域18</li>
+                <li class="block">代码区域19</li>
+                <li class="block">代码区域20</li>
+        </ul>
+
+
+
+    <script type="text/javascript">
+        var Main = {};
+        var Component = Vue.extend(Main);
+        new Component().$mount('#menu0');
+    </script>
+    <script>
+        $('#value').value=undefined;
+        window.onload=search();
+    </script>
+    <script src="../rightmenu.js"></script>
+    <script>
+      const testMode = false; // 为true时可以在浏览器打开不报错
+      // vscode webview 网页和普通网页的唯一区别：多了一个acquireVsCodeApi方法
+      const vscode = testMode ? {} : acquireVsCodeApi();
+      const callbacks = {};
+      function callVscode() {
+        //document.getElementById("cs1").innerHTML = "2222222222222222222222222222222222222222222222222222222222222222";
+        vscode.postMessage({text:'webview test'});
+        //document.getElementById("cs1").innerHTML = "3333333333333333333333333333333333333333333333333333333333333333";
+      }
+      window.addEventListener('message', event => {
+        const message = event.data;
+        //document.getElementById("cs1").innerHTML = message.codesnippet1;
+        console.log(message);
+
+        if(window.WebSocket){
+          var ws = new WebSocket('ws://localhost:8080/CRServer/websocket');
+
+          ws.onopen = function(e){
+              console.log("连接服务器成功");
+              ws.send(message.codesnippet1);
+          }
+          ws.onclose = function(e){
+              console.log("服务器关闭");
+          }
+          ws.onerror = function(){
+              console.log("连接出错");
+          }
+
+          ws.onmessage = function(e){
+            console.log(e.data);
+            var codes = JSON.parse(e.data);
+            //var codes = e.data.parseJSON();
+            
+            document.getElementById("cs1").innerHTML = formatecode(codes[0].codesnippet0) ;
+            document.getElementById("cs2").innerHTML = formatecode(codes[1].codesnippet1) ;
+            document.getElementById("cs3").innerHTML = formatecode(codes[2].codesnippet2) ;
+            document.getElementById("cs4").innerHTML = formatecode(codes[3].codesnippet3) ;
+            document.getElementById("cs5").innerHTML = formatecode(codes[4].codesnippet4) ;
+            document.getElementById("cs6").innerHTML = formatecode(codes[5].codesnippet5) ;
+            document.getElementById("cs7").innerHTML = formatecode(codes[6].codesnippet6) ;
+            document.getElementById("cs8").innerHTML = formatecode(codes[7].codesnippet7) ;
+            document.getElementById("cs9").innerHTML = formatecode(codes[8].codesnippet8) ;
+            document.getElementById("cs10").innerHTML = formatecode(codes[9].codesnippet9) ;
+            document.getElementById("cs11").innerHTML = formatecode(codes[10].codesnippet10) ;
+            document.getElementById("cs12").innerHTML = formatecode(codes[11].codesnippet11) ;
+          }
+        }
+
+
+        //document.getElementById("cs1").innerHTML = "44444444444444444444444444444444444444444444444444444444444444444";
+      });
+    </script>
+
+    <script>
+      function formatecode(code){
+            code = code.replace(/\n/g, "<br>");
+            code = code.replace(/ /g, "&nbsp");
+            return code;
+      }
+    </script>
+
+    <script>
+      function testaaaaa(data, cb) {
+        document.getElementById("cs1").innerHTML = "1111111111111111111111111111111111111111111111111111111111111111";
+      }  
+    </script>
+<!--
+    <script>
+      var mess = document.getElementById("mess");
+      if(window.WebSocket){
+          var ws = new WebSocket('ws://localhost:8080/CRServer/websocket');
+
+          ws.onopen = function(e){
+              console.log("连接服务器成功");
+              ws.send(vscode.window.activeTextEditor.document.getText());
+              ws.send("11111111111111111111111111111111111111111");
+          }
+          ws.onclose = function(e){
+              console.log("服务器关闭");
+          }
+          ws.onerror = function(){
+              console.log("连接出错");
+          }
+
+          ws.onmessage = function(e){
+            console.log(e.data);
+            document.getElementById("cs1").innerHTML = e.data;
+          }
+      }
+  </script>
+-->
+</body>
+</html>
