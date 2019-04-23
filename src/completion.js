@@ -9,6 +9,9 @@ const util = require('./util');
  * @param {*} token 
  * @param {*} context 
  */
+
+var dependencies = ["sadasdas","dasdasddddddddd","int i"];
+
 function provideCompletionItems(document, position, token, context) {
     
     const line = document.lineAt(position);
@@ -22,13 +25,14 @@ function provideCompletionItems(document, position, token, context) {
     if(true) {
         //const json = require(`${projectPath}/package.json`);
         //const dependencies = Object.keys(json.dependencies || {}).concat(Object.keys(json.devDependencies || {}));
-        const dependencies = ["sadasdas","dasdasddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd\ndassssssssssssssssssssssssssssss"];
         return dependencies.map(dep => {
             // vscode.CompletionItemKind 表示提示的类型
-            
             return new vscode.CompletionItem(dep, vscode.CompletionItemKind.Text);
+
+
         })
     }
+
 }
 
 /**
@@ -42,10 +46,34 @@ function resolveCompletionItem(item, token) {
 
 module.exports = function(context) {
     // 注册代码建议提示，只有当按下“.”时才触发
-    console.log("22222222222222222222222222222222222222222222222222222222222222222222222");
-    context.subscriptions.push(vscode.languages.registerCompletionItemProvider('javascript', {
+    console.log("completion method registes begin");
+    context.subscriptions.push(vscode.languages.registerCompletionItemProvider('java', {
         provideCompletionItems,
         resolveCompletionItem
-    }, '.'));
-    console.log("22222222222222222222222222222222222222222222222222222222222222222222222");
+    }));
+    console.log("completion method registes done");
+
+    vscode.window.onDidChangeActiveTextEditor(addItem);
+
+    vscode.workspace.onDidChangeTextDocument(textChange);
 };
+
+function textChange(){
+    console.log("TextEditor edit");
+    const document = vscode.window.activeTextEditor.document;
+    const position = vscode.window.activeTextEditor.selection.active;
+    var cursorline = position.line;
+    var cursorlocation = position.character;
+    var code = "";
+    for (var i = 0; i < cursorline; i++){
+        code += document.lineAt(i).text;
+    }
+    code += document.lineAt(cursorline).text.substring(0,cursorlocation+1);
+    console.log(code);
+}
+
+
+function addItem(){
+    console.log("onDidChangeActiveTextEditor begin");
+    dependencies[dependencies.length] = "double jjjjj"
+}
