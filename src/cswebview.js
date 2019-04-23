@@ -65,6 +65,10 @@ const messageHandler = {
     }
 };
 
+
+var panel = null;
+var te;
+
 module.exports = function(context) {
 
     // 注册命令，可以给命令配置快捷键或者右键菜单
@@ -76,7 +80,7 @@ module.exports = function(context) {
             console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
             //return;
         }
-        const panel = vscode.window.createWebviewPanel(
+        panel = vscode.window.createWebviewPanel(
             'testWebview', // viewType
             "Code Snippets Recommendation", // 视图标题
             vscode.ViewColumn.One, // 显示在编辑器的哪个部位
@@ -88,12 +92,30 @@ module.exports = function(context) {
         let global = { projectPath, panel};
         //panel.webview.html = getWebViewContent(context, 'src/view/test-webview.html');
         panel.webview.html = getWebViewContent(context, 'src/view/csrecommendation1.html');
-        let code = vscode.window.activeTextEditor.document.getText();
-        panel.webview.postMessage({codesnippet1: code});
+        
+        te = vscode.window.activeTextEditor;
+        //panel.webview.postMessage({codesnippet1: code});
+
+
+
         panel.webview.onDidReceiveMessage(message => {
             console.log('插件收到的消息：', message);
+            let code = te.document.getText();
             console.log('code消息：', code);
             panel.webview.postMessage({codesnippet1 : code});
         }, undefined, context.subscriptions);
+
+
+        vscode.window.onDidChangeActiveTextEditor(ActiveTextEditorChange);
+
+
+
     }));
 };
+
+function ActiveTextEditorChange(){
+    console.log("onDidChangeActiveTextEditor event happened");
+    if(!panel.active){
+        te = vscode.window.activeTextEditor;
+    }
+}

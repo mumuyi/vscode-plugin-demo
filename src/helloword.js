@@ -22,6 +22,7 @@ module.exports = function(context) {
             //connection.setUpConnection();
             //connection.sendMessage(msg);
 
+            
             var myDate = new Date();
             var t1 = myDate.getTime();
             const WebSocket = require('ws');
@@ -38,6 +39,11 @@ module.exports = function(context) {
             console.log(t1);
             console.log(t2);
             console.log(t2-t1);
+            
+
+           //console.log(vscode.window.visibleTextEditors.length);
+           //console.log(vscode.TextEdit.length);
+           //console.log(vscode.window.visibleTextEditors[0].document.fileName);
         });
     }));
 };
