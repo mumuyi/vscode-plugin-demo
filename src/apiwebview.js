@@ -70,7 +70,7 @@ module.exports = function(context) {
     // 注册命令，可以给命令配置快捷键或者右键菜单
     // 回调函数参数uri：当通过资源管理器右键执行命令时会自动把所选资源URI带过来，当通过编辑器中菜单执行命令时，会将当前打开的文档URI传过来
     context.subscriptions.push(vscode.commands.registerCommand('extension.apiwebview', function (uri) {
-        /*
+        
         // 工程目录一定要提前获取，因为创建了webview之后activeTextEditor会不准确
         const projectPath = util.getProjectPath(uri);
         if (!projectPath) {
@@ -88,7 +88,7 @@ module.exports = function(context) {
         );
         let global = { projectPath, panel};
         //panel.webview.html = getWebViewContent(context, 'src/view/test-webview.html');
-        panel.webview.html = getWebViewContent(context, 'src/view/apiRecommendation.html');
+        panel.webview.html = getWebViewContent(context, 'src/view/apiRecommendation1.html');
         panel.webview.onDidReceiveMessage(message => {
             if (messageHandler[message.cmd]) {
                 messageHandler[message.cmd](global, message);
@@ -96,12 +96,12 @@ module.exports = function(context) {
                 util.showError(`未找到名为 ${message.cmd} 回调方法!`);
             }
         }, undefined, context.subscriptions);
-        */
-       console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
-       console.log(vscode.window.activeTextEditor.document.getText());
-       console.log(vscode.window.activeTextEditor.document.lineCount);
-       const position = vscode.window.activeTextEditor.selection.active;
-       console.log(position.character);
-       console.log(position.line);
+        
+       //console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+       //console.log(vscode.window.activeTextEditor.document.getText());
+       //console.log(vscode.window.activeTextEditor.document.lineCount);
+       //const position = vscode.window.activeTextEditor.selection.active;
+       //console.log(position.character);
+       //console.log(position.line);
     }));
 };
